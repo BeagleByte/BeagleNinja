@@ -10,10 +10,7 @@ A portable Docker-based multi-Tor setup with HAProxy load balancing for enhanced
 
 - **4 Independent Tor Instances** - Separate circuits for redundancy
 - **Random Load Balancing** - HAProxy with `balance random` for unpredictable routing
-- **Anti-Timing Attack** - Multiple circuits prevent correlation 
 - **Privoxy Integration** - HTTP proxy with content filtering
-- **USB Portable** - Run from USB stick on any machine with Docker
-- **Proxychains Compatible** - Full support for advanced proxy chaining
 - **Health Monitoring** - Built-in HAProxy statistics dashboard
 - **Cross-Platform** - Works on Linux, macOS, and Windows
 
@@ -22,7 +19,6 @@ A portable Docker-based multi-Tor setup with HAProxy load balancing for enhanced
 - **Docker** (20.10+)
 - **Docker Compose** (2.0+)
 - **4GB RAM** recommended
-- **USB 3.0 stick** (8GB+) for portable use
 
 
 ### 🔌 Usage
@@ -88,7 +84,7 @@ tail -f logs/haproxy.out.log
 
 ## 🔒 Security Considerations
 
-### ✅ Built-in Protections
+### ✅ work in progress
 - Stream isolation per destination/port
 - Regular circuit rotation (every 10 minutes)
 - No relay/exit node operation
@@ -104,9 +100,8 @@ tail -f logs/haproxy.out.log
 
 ### 🛡️ Hardening Recommendations
 
-1. **Encrypt your USB stick** - Use LUKS, BitLocker, or FileVault
-2. **Use with Tails/Whonix** - Combine with OS-level anonymity
-3. **Browser hardening**:
+1. **Use with Tails/Whonix** - Combine with OS-level anonymity
+2**Browser hardening**:
     - Use Tor Browser or hardened Firefox
     - Disable WebRTC:  `media.peerconnection.enabled = false`
     - Use HTTPS Everywhere / uBlock Origin
@@ -272,10 +267,9 @@ Tor is legal in most countries but may be restricted in some jurisdictions. Chec
 ## 🤝 Contributing
 
 Improvements welcome! Consider:
-- I2P integration (see roadmap)
-- Additional anonymity networks (Freenet, GNUnet)
+- I2P integration
 - Better health checking
-- Automated testing suite
+- Vanguards
 
 ## 📜 License
 
@@ -288,6 +282,9 @@ MIT License - See LICENSE file
 - [Privoxy Manual](https://www.privoxy.org/user-manual/)
 - [Proxychains GitHub](https://github.com/haad/proxychains)
 - [Docker Security Best Practices](https://cheatsheetseries.owasp.org/cheatsheets/Docker_Security_Cheat_Sheet.html)
+- The first address for using Tor: https://www.torproject.org/
+- Tor Bridges: https://bridges.torproject.org/bridges?transport=obfs4
+- Here are the Spec for Tor, here you can learn a lot about Tor: https://spec.torproject.org/
 
 ## 📞 Support
 
