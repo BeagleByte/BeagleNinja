@@ -1,0 +1,9 @@
+# torrc for instance {{INSTANCE}}
+DataDirectory {{DATA_DIR}}
+SocksPort 905{{INSTANCE}}  # 9051..9054
+ControlPort 905{{INSTANCE}}1 # 90511..90541 (unique)
+Log notice stdout
+RunAsDaemon 0
+# make tor bind to container network
+SocksListenAddress 0.0.0.0
+ControlListenAddress 127.0.0.1

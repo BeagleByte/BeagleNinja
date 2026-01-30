@@ -1,0 +1,46 @@
+## Tor Instance 2 Configuration
+## SOCKS Port:  9051
+
+# Basic settings
+SocksPort 127.0.0.1:9051
+DataDirectory /var/lib/tor2
+Log notice file /var/log/tor/tor2.log
+
+# Control port
+ControlPort 9251
+CookieAuthentication 1
+
+# Performance tuning
+NumEntryGuards 3
+MaxCircuitDirtiness 600
+NewCircuitPeriod 30
+CircuitBuildTimeout 60
+
+# Stream isolation (anti-timing attack)
+#SocksPort 127.0.0.1:9051 IsolateDestAddr 1 IsolateDestPort 1
+#SocksPort 9051 SessionGroup=2
+
+# DNS through Tor
+
+
+# Disable client-side exit node caching
+UseEntryGuards 1
+
+# Bandwidth
+RelayBandwidthRate 0
+RelayBandwidthBurst 0
+
+# Disable running as relay/exit
+ORPort 0
+DirPort 0
+ExitPolicy reject *:*
+ExitRelay 0
+# Security enhancements
+#ExitNodes {NG},{HK},{BR},{JP},{IN},{ID},{KR},{SC},{ZA},{PE}
+#EntryNodes {NG},{HK},{BR},{JP},{IN},{ID},{KR},{SC}
+ExcludeNodes {US}
+StrictNodes 1
+
+#UseBridges 1
+#ClientTransportPlugin obfs4 exec /usr/bin/obfs4proxy
+#Bridge obfs4 99.229.13.103:30001 5DC082C91C2EF469EB5B30C90AF4E26DB4911321 cert=kY/aJAA8pp6FMtoZxBPBEC7atKAd/uajsMkvFybrmBUSQL4tZA1J6FH4N9X9W5sAWx8FAA iat-mode=0

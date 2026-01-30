@@ -1,0 +1,45 @@
+## Tor Instance 4 Configuration
+## SOCKS Port: 9053
+
+# Basic settings
+SocksPort 127.0.0.1:9053
+DataDirectory /var/lib/tor4
+Log notice file /var/log/tor/tor4.log
+
+# Control port
+ControlPort 9451
+CookieAuthentication 1
+
+# Performance tuning
+NumEntryGuards 3
+MaxCircuitDirtiness 600
+NewCircuitPeriod 30
+CircuitBuildTimeout 60
+
+# Stream isolation (anti-timing attack)
+#SocksPort 127.0.0.1:9053 IsolateDestAddr 1 IsolateDestPort 1
+#SocksPort 9051 SessionGroup=4
+
+# DNS through Tor
+
+
+# Disable client-side exit node caching
+UseEntryGuards 1
+
+# Bandwidth
+RelayBandwidthRate 0
+RelayBandwidthBurst 0
+
+# Disable running as relay/exit
+ORPort 0
+DirPort 0
+ExitPolicy reject *:*
+ExitRelay 0
+# Security enhancements
+#ExitNodes {NG},{HK},{BR},{JP},{IN},{ID},{KR},{SC},{ZA},{PE}
+#EntryNodes {NG},{HK},{BR},{JP},{IN},{ID},{KR},{SC}
+ExcludeNodes {US}
+StrictNodes 1
+#UseBridges 1
+#ClientTransportPlugin obfs4 exec /usr/bin/obfs4proxy
+#Bridge obfs4 92.141.190.119:4001 7C2BE94309B2642B880320657D329C23A272A478 cert=hNcAnHr+jfRPGIFLB05TCKHlsSbsJOctt0Y4UPsR75Auy4ZCdsRVvx3dRqtXxzykVFEKPg iat-mode=0

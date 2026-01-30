@@ -1,0 +1,55 @@
+services:
+  tor-loadbalancer:
+    build: .
+    container_name: tor-anonymity
+    hostname: tor-proxy
+    ports:
+      - "9050:9050"   # Tor instance 1
+      - "9051:9051"   # Tor instance 2
+      - "9052:9052"   # Tor instance 3
+      - "9053:9053"   # Tor instance 4
+      - "9999:9999"   # HAProxy load balancer (random)
+      - "8118:8118"   # Privoxy HTTP proxy
+    volumes:
+      # Config files (read-only)
+      - ./config/torrc1:/etc/tor/torrc1:ro
+      - ./config/torrc2:/etc/tor/torrc2:ro
+      - ./config/torrc3:/etc/tor/torrc3:ro
+      - ./config/torrc4:/etc/tor/torrc4:ro
+      - ./config/haproxy.cfg:/etc/haproxy/haproxy.cfg
+      - ./config/privoxy.cfg:/etc/privoxy/config
+      - ./config/supervisord.conf:/etc/supervisor/conf.d/supervisord.conf:ro
+
+      # Data directories (persistent for guard nodes)
+      - ./data/tor1:/var/lib/tor1
+      - ./data/tor2:/var/lib/tor2
+      - ./data/tor3:/var/lib/tor3
+      - ./data/tor4:/var/lib/tor4
+
+      # Logs
+      - ./logs:/var/log/tor-proxy
+    restart: unless-stopped
+    # Security hardening
+    cap_drop:
+      - ALL
+    cap_add:
+      - CHOWN
+      - SETUID
+      - SETGID
+      - DAC_OVERRIDE
+      - NET_BIND_SERVICE
+      - NET_RAW           # Add this
+      - NET_ADMIN         # Add this too
+    security_opt:
+      - no-new-privileges:true
+    # Resource limits
+    mem_limit: 2g
+    memswap_limit: 2g
+    cpu_shares: 1024
+    environment:
+      - TZ=UTC
+    networks:
+      - tor-network
+networks:
+  tor-network:
+    driver: bridge

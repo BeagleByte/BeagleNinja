@@ -1,0 +1,45 @@
+## Tor Instance 3 Configuration
+## SOCKS Port: 9052
+
+# Basic settings
+SocksPort 127.0.0.1:9052
+DataDirectory /var/lib/tor3
+Log notice file /var/log/tor/tor3.log
+
+# Control port
+ControlPort 9351
+CookieAuthentication 1
+
+# Performance tuning
+NumEntryGuards 3
+MaxCircuitDirtiness 600
+NewCircuitPeriod 30
+CircuitBuildTimeout 60
+
+# Stream isolation (anti-timing attack)
+#SocksPort 127.0.0.1:9051 IsolateDestAddr 1 IsolateDestPort 1
+#SocksPort 9052 SessionGroup=3
+
+# DNS through Tor
+
+
+# Disable client-side exit node caching
+UseEntryGuards 1
+
+# Bandwidth
+RelayBandwidthRate 0
+RelayBandwidthBurst 0
+
+# Disable running as relay/exit
+ORPort 0
+DirPort 0
+ExitPolicy reject *:*
+ExitRelay 0
+# Security enhancements
+#ExitNodes {NG},{HK},{BR},{JP},{IN},{ID},{KR},{SC},{ZA},{PE}
+#EntryNodes {NG},{HK},{BR},{JP},{IN},{ID},{KR},{SC}
+ExcludeNodes {US}
+StrictNodes 1
+#UseBridges 1
+#ClientTransportPlugin obfs4 exec /usr/bin/obfs4proxy
+#Bridge obfs4 45.95.232.5:443 3CE205F7D7DE61E6E1787024EEDC03DCCFCA3C6A cert=1vxTSEr+6QCPpop3y0uEpY/V1ad4fB8ANayCPmh8DcPn4pt5kYNFctUjCA5A+GPmST1LNA iat-mode=2

@@ -1,0 +1,50 @@
+## Tor Instance 1 Configuration
+
+##### Cover up your tor traffic with obfs4 bridges #####
+# Obfs4 Bridge Configuration from 20.01.2026, you can get fresh ones from https://bridges.torproject.org/
+
+# Basic settings
+SocksPort 127.0.0.1:9050
+DataDirectory /var/lib/tor1
+Log notice file /var/log/tor/tor1.log
+
+# Control port (optional, for monitoring)
+#ControlPort 9151
+#CookieAuthentication 1
+
+# Performance tuning
+NumEntryGuards 3
+MaxCircuitDirtiness 600
+NewCircuitPeriod 30
+CircuitBuildTimeout 60
+
+# Stream isolation (anti-timing attack)
+#SocksPort 127.0.0.1:9050 IsolateDestAddr 1 IsolateDestPort 1
+#SocksPort 9050 SessionGroup=1
+
+# DNS through Tor
+
+
+# Disable client-side exit node caching
+#UseEntryGuards 1
+
+# Bandwidth
+RelayBandwidthRate 0
+RelayBandwidthBurst 0
+
+# Disable running as relay/exit
+ORPort 0
+DirPort 0
+ExitPolicy reject *:*
+ExitRelay 0
+# Security enhancements
+#ExitNodes {NG},{HK},{BR},{JP},{IN},{ID},{KR},{SC},{ZA},{PE}
+
+### If using a bridge, EntryNodes are not needed nor tor will run #####
+#EntryNodes {NG},{HK},{BR},{JP},{IN},{ID},{KR},{SC}
+
+ExcludeNodes {US}
+#StrictNodes 1
+#UseBridges 1
+#ClientTransportPlugin obfs4 exec /usr/bin/obfs4proxy
+#Bridge obfs4 185.117.73.71:31337 E315A7F8A5E2C1B4819D09D79C5A627D65C182AB cert=uFpKPZe/wmdL4o&#43;mGABkhUSh33w457bfY3r&#43;D93o0bzda&#43;NpdAkkr87dUkzihagV61WIOA iat-mode=0
