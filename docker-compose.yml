@@ -38,8 +38,8 @@ services:
       - SETGID
       - DAC_OVERRIDE
       - NET_BIND_SERVICE
-      - NET_RAW           # Add this
-      - NET_ADMIN         # Add this too
+      - NET_RAW
+      - NET_ADMIN
     security_opt:
       - no-new-privileges:true
     # Resource limits
