@@ -1,6 +1,9 @@
 services:
   tor-loadbalancer:
-    build: .
+    build:
+      context: .
+      #dockerfile: Dockerfile.Vanguards
+      dockerfile: Dockerfile
     container_name: tor-anonymity
     hostname: tor-proxy
     ports:

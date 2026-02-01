@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# append bridges from Bridges/bridges.txt to multiple torrc files
 # Path to bridge list file
 BRIDGE_FILE="Bridges/bridges.txt"
 
